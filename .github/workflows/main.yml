@@ -14,7 +14,7 @@ jobs:
       - name: Print project tree
         run: tree .
 
-        
+
   tests:
     runs-on: ubuntu-latest
     # Блок services аналогичен docker-compose.yml
@@ -95,7 +95,7 @@ jobs:
           # Для каждого пересобранного образа 
           # устанавливаем тег latest, чтобы потом
           # на сервере и в docker-compose.yml не указывать версию
-          tags: ваш-логин-на-docker-hub/taski_backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/taski_backend:latest
 
 
   frontend_tests:
@@ -140,7 +140,7 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: username/taski_frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/taski_frontend:latest
 
 
   build_gateway_and_push_to_docker_hub:
@@ -162,6 +162,5 @@ jobs:
           context: ./gateway/
           push: true
           # Тут вместо username должен быть ваш логин на Docker Hub
-          tags: username/taski_gateway:latest
-
+          tags: ${{ secrets.DOCKER_USERNAME }}/taski_gateway:latest
 
